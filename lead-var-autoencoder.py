@@ -21,11 +21,7 @@ warnings.filterwarnings("ignore", message="torch.utils.checkpoint: the use_reent
 warnings.filterwarnings('ignore',message='None of the inputs have requires_grad=True. Gradients will be None')
 warnings.simplefilter(action='ignore', category=FutureWarning)
 train_df=pd.read_csv("./DATASET/train.csv")
-train_feats=pd.read_csv("./DATASET/train_features.csv")
 
-for col in train_feats.columns:
-    if train_feats[col].dtype=='object':
-        print(col)
 from momentfm.utils.anomaly_detection_metrics import adjbestf1
 
 class TimeDataset(Dataset):

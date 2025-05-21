@@ -69,7 +69,7 @@ pip install -r requirements.txt
 
 > If there is no `requirements.txt`, manually install essentials:
 > ```bash
-> pip install torch torchvision numpy pandas sklearn matplotlib
+> pip install torch torchvision numpy pandas scikit-learn matplotlib momentfm
 > ```
 
 ---
@@ -83,7 +83,6 @@ pip install -r requirements.txt
 ├── lead-Iof-count.py
 ├── lead-iqr.py
 ├── lead-mz-score.py
-├── data/
 ├── configs/
 ├── results/
 ├── requirements.txt
@@ -91,13 +90,42 @@ pip install -r requirements.txt
 ```
 
 ---
+
+### 📂 Dataset Setup (LEAD)
+
+To begin training or fine-tuning, download the **LEAD dataset** from Kaggle.
+
+1. Download the file **`train.csv`** from the dataset repository:
+   - 👉 [Download link here](https://www.kaggle.com/competitions/energy-anomaly-detection/data?select=train.csv)
+
+2. Create a folder named `DATASET/` in the root of the repository (if it doesn't already exist), and move the CSV file into it:
+
+   ```bash
+   mkdir -p DATASET
+   mv /path/to/downloaded/train.csv DATASET/
+   ```
+
+   > Replace `/path/to/downloaded/train.csv` with the actual path where your file was downloaded.
+
+3. After this, your repo structure should look like:
+
+   ```
+   .
+   ├── DATASET/
+   │   └── train.csv
+   ├── moment-lead-finetuning.py
+   ├── ...
+   ```
+
+Now you're ready to start training using the `train.csv` dataset.
+
 ## Usage
 
 ### 1. Executing `lead-var-autoencoder.py`
 
 ```bash
 python lead-var-autoencoder.py \
-  --data_path data/your_dataset.csv \
+  --data_path DATASET/your_dataset.csv \
   --output_dir results/lead_vae \
   --epochs 50 \
   --batch_size 32 \
@@ -116,7 +144,7 @@ python lead-var-autoencoder.py \
 ```bash
 python moment-lead-finetuning.py \
   --pretrained_model results/lead_vae/best_model.pth \
-  --data_path data/moment_lead.csv \
+  --data_path DATASET/moment_lead.csv \
   --output_dir results/finetune \
   --epochs 20 \
   --batch_size 16 \

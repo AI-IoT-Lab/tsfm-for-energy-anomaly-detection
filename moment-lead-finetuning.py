@@ -23,15 +23,8 @@ import matplotlib.pyplot as plt
 # You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
 # You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
 train_df=pd.read_csv("./DATASET/train.csv")
-train_feats=pd.read_csv("./DATASET/train_features.csv")
-train_feats.info(verbose=True)
 
 from sklearn.preprocessing import LabelEncoder
-for col in train_feats.columns:
-    if train_feats[col].dtype=='object':
-        print(col)
-
-
 
 from momentfm import MOMENTPipeline
 
